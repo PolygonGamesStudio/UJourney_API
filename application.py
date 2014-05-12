@@ -1,8 +1,8 @@
 import tornado.escape
 import tornado.ioloop
 import tornado.web
-
-from RESTful_API.view import GetGameByIdHandler, VersionHandler
+from api.get_game_by_id_handler import GetGameByIdHandler
+from api.version_handler import VersionHandler
 
 
 application = tornado.web.Application([
@@ -13,3 +13,4 @@ application = tornado.web.Application([
 if __name__ == "__main__":
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
+
