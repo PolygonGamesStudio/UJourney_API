@@ -5,6 +5,15 @@
  - Версия：0.0.1
 
 # request
+- history
+    - POST
+        - url: '/history'
+        - format: json
+        - request: {"user": "mike", "place": "True Burgers", "time": "2001-2-3 10:11:12"}
+        - response:
+            - success: {"status": "ok"}
+            - fail: {"status_code": "417", "status_txt": "Invalid POST request, check the data.", "status": "fail"}
+
 - server
     - POST
         - url: '/game'
