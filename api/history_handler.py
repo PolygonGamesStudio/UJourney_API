@@ -32,11 +32,14 @@ class HistoryHandler(tornado.web.RequestHandler):
 
         @return: ответ сервера о статусе добавления данных
         """
-        data = tornado.escape.json_decode(self.request.body)
+        try:
+            data = tornado.escape.json_decode(self.request.body)
+        except ValueError:
+            data = {}
         orm = ORM("Journey")
 
-        if data['user_id']:
-            result = orm.select("history", {"user.user_id": data['user_id']})
+        if data.get('user_id', ''):
+            result = orm.select("history", {"user.user_id": data.get('user_id', '')})
             self.write(json.dumps(list(result)))
         else:
             self.write({})
@@ -51,10 +54,13 @@ class HistoryHandler(tornado.web.RequestHandler):
 
         @return: ответ сервера о статусе добавления данных
         """
-        data = tornado.escape.json_decode(self.request.body)
+        try:
+            data = tornado.escape.json_decode(self.request.body)
+        except ValueError:
+            data = {}
         orm = ORM("Journey")
 
-        if data['place_id'].isdigit():
+        if data.get('place_id', '').isdigit():
             orm.delete("history", {"id": int(data['place_id'])})
             self.write({"status": "ok"})
         else:
@@ -64,7 +70,3 @@ class HistoryHandler(tornado.web.RequestHandler):
                 "status": "fail"
             })
         del orm
-
-
-
-
