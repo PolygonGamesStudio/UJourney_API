@@ -25,6 +25,11 @@ class MongoORM(object):
         collection.insert(json)
         return 0
 
+    def delete(self, name_collection, json):
+        collection = self.db[name_collection]
+        collection.remove(json)
+        return 0
+
     def count(self, name_collection):
         collection = self.db[name_collection]
         return collection.count()
