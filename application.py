@@ -9,7 +9,8 @@ from api.version_handler import VersionHandler
 application = tornado.web.Application([
     (r"/getgamebyid/([0-9]+)", GetGameByIdHandler),
     (r"/version", VersionHandler),
-    (r"/history", HistoryHandler)
+    (r"/history", HistoryHandler),
+    (r"/history/([\w]+)", HistoryHandler)
 ])
 
 if __name__ == "__main__":

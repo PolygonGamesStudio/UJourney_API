@@ -6,37 +6,16 @@
 
 # request
 - history
+    - GET
+        - url: '/history/([\w]+)'
+        - format: json
+        - request: user_id
+        - response: {"user": {"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"}, "title": "True Burgers", "visit": "2001-2-3 10:11:12", "rating": 3, "picture": "vk.com/icon.png", "id": "0"}
     - POST
         - url: '/history'
         - format: json
-        - request: {"user": "mike", "place": "True Burgers", "time": "2001-2-3 10:11:12"}
+        - request: [{"user": {"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"}, "title": "True Burgers", "visit": "2001-2-3 10:11:12", "rating": 3, "picture": "vk.com/icon.png", "id": "0"}, ...]
         - response:
             - success: {"status": "ok"}
             - fail: {"status_code": "417", "status_txt": "Invalid POST request, check the data.", "status": "fail"}
 
-- server
-    - POST
-        - url: '/game'
-        - format: json
-        - request: {"server":'127.0.0.1:80'}
-        - response:
-            - success:  {"id":2}
-            - fail:     {"status_code": 400, "status_txt": "Invalid POST request, check the data."}
-
-    - GET
-       - url: '/game'
-       - request: none
-       - response:
-            - success: {"address": "127.0.0.1:8880"}
-            - fail: {"status_code": 404, "status_txt": "Invalid address"}
-
-    - PUT
-    - PATCH
-    - DELETE
-        - url: '/game/{game_id}'
-        - request:  none
-        - response:
-            - success: HTTP 200
-            - fail:
-                - {"status_code": 403, 'status_txt': 'Access denied'}
-                - {"status_code": 500, 'status_txt': 'Error unknown. May try latter'}
