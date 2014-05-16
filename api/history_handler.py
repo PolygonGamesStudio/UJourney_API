@@ -12,12 +12,17 @@ class HistoryHandler(tornado.web.RequestHandler):
         @return: ответ сервера о статусе добавления данных
         """
         orm = ORM("Journey")
-        #  TODO: проверка json и ответ ошибкой из доков
-        data = tornado.escape.json_decode(self.request.body)
-        orm.insert(data, "history")
-
+        try:
+            data = tornado.escape.json_decode(self.request.body)
+            orm.insert(data, "history")
+            self.write({"status": "ok"})
+        except ValueError:
+            self.write({
+                "status_code": "417",
+                 "status_txt": "Invalid POST request, check the data.",
+                 "status": "fail"
+            })
         del orm
-        self.write({"status": "ok"})
 
     def get(self):
         """
