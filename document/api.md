@@ -25,4 +25,3 @@
         - response:
             - success: {"status": "ok"}
             - fail: {"status_code": "411", "status_txt": "Invalid DELETE request, check the data.", "status": "fail"}
-
