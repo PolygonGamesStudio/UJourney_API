@@ -24,22 +24,18 @@ class HistoryHandler(tornado.web.RequestHandler):
             })
         del orm
 
-    def get(self):
+    def get(self, user_id):
         """
         Получения списка мест в кторорых был пользователь
 
         @param user_id: поле по которому идёт выборка из базы
 
-        @return: ответ сервера о статусе добавления данных
+        @return: ответ сервера о статусе добаввления данных
         """
-        try:
-            data = tornado.escape.json_decode(self.request.body)
-        except ValueError:
-            data = {}
         orm = ORM("Journey")
 
-        if data.get('user_id', ''):
-            result = orm.select("history", {"user.user_id": data.get('user_id', '')})
+        if user_id:
+            result = orm.select("history", {"user.user_id": user_id})
             self.write(json.dumps(list(result)))
         else:
             self.write({})
