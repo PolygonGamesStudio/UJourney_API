@@ -13,13 +13,21 @@ curl -H "Content-Type: application/json" -d '{"user": {"name": "Mike","lastname"
 - history
     - GET
         - url: '/history/([\w]+)'
-        - format: json
-        - request: user_id
-        - response: {"user": {"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"}, "title": "True Burgers", "visit": "2001-2-3 10:11:12", "rating": 3, "picture": "vk.com/icon.png", "id": 0}
+        - format: GET params
+        - request: /history/'user_id'?'place_id=ID'
+        - response: {"user":
+                        {"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"},
+                     "place":
+                        {"title": "True Burgers", "picture": "vk.com/icon.png", "place_id": "11"},
+                     "visit": "2001-2-3 10:11:12",
+                     "rating": 3,
+                     "history_id": 0
+        }
+
     - POST
         - url: '/history'
         - format: json
-        - request: [{"user": {"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"}, "title": "True Burgers", "visit": "2001-2-3 10:11:12", "rating": 3, "picture": "vk.com/icon.png", "id": 0}, ...]
+        - request: [{"user":{"name": "Mike", "lastname": "Petrov", "user_id": "hfdjaoqi21"},"place":{"title": "True Burgers", "picture": "vk.com/icon.png", "place_id": "11"},"visit": "2001-2-3 10:11:12","rating": 3,"history_id": 0}, ...]
         - response:
             - success: {"status": "ok"}
             - fail: {"status_code": "417", "status_txt": "Invalid POST request, check the data.", "status": "fail"}

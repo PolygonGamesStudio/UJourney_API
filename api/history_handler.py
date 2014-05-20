@@ -28,14 +28,19 @@ class HistoryHandler(tornado.web.RequestHandler):
         """
         Получения списка мест в кторорых был пользователь
 
-        @param user_id: поле по которому идёт выборка из базы
+        @param user_id: уникальный идентификатор пользователя
+        @param place_id: уникальный идентификатор места
 
         @return: ответ сервера о статусе добаввления данных
         """
         orm = ORM("Journey")
+        place_id = self.get_argument("place_id", "")
 
         if user_id:
-            result = orm.select("history", {"user.user_id": user_id})
+            if place_id:
+                result = orm.select("history", {"user.user_id": user_id, "place.place_id": place_id})
+            else:
+                result = orm.select("history", {"user.user_id": user_id})
             self.write(json.dumps(list(result)))
         else:
             self.write({})
