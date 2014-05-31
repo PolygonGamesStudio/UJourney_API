@@ -55,6 +55,12 @@ class HistoryHandler(tornado.web.RequestHandler):
 
         @return: ответ сервера о статусе добавления данных
         """
+
+        # TODO: сравнение входного массива ключей с требуемым
+        # a = [1,2,3]
+        # b = [3,2,1,4]
+        # set(a).issubset(set(b))
+
         try:
             data = tornado.escape.json_decode(self.request.body)
         except ValueError:

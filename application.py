@@ -7,11 +7,11 @@ from api.version_handler import VersionHandler
 
 
 application = tornado.web.Application([
-    (r"/version", VersionHandler),
-    (r"/history", HistoryHandler),
-    (r"/history/([\w]+)", HistoryHandler),
-    (r"/user", UserHandler),
-    (r"/user/([\w]+)", UserHandler)
+    (r"/api/v1.0/version", VersionHandler),
+    (r"/api/v1.0/history", HistoryHandler),
+    (r"/api/v1.0/history/([\w]+)", HistoryHandler),
+    (r"/api/v1.0/user", UserHandler),
+    (r"/api/v1.0/user/([\w]+)", UserHandler)
 ])
 
 if __name__ == "__main__":
